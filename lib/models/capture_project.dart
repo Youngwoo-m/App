@@ -33,13 +33,11 @@ class CaptureProject {
     List<String>? photoFileNames,
     List<String>? videoFileNames,
     this.reconStatus = ReconStatus.none,
-  })  : photoFileNames = photoFileNames ?? <String>[],
-        videoFileNames = videoFileNames ?? <String>[];
+  }) : photoFileNames = photoFileNames ?? <String>[],
+       videoFileNames = videoFileNames ?? <String>[];
 
   int get photoCount => photoFileNames.length;
   int get videoCount => videoFileNames.length;
-
-  bool get hasEnoughPhotos => photoCount >= recommendedMinPhotos;
 
   /// 재구성 입력 충분 여부: 사진 20장 이상 또는 동영상 1개 이상.
   bool get isReadyForReconstruction =>
@@ -52,25 +50,25 @@ class CaptureProject {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'createdAt': createdAt.toIso8601String(),
-        'photoFileNames': photoFileNames,
-        'videoFileNames': videoFileNames,
-        'reconStatus': reconStatus.name,
-      };
+    'id': id,
+    'name': name,
+    'createdAt': createdAt.toIso8601String(),
+    'photoFileNames': photoFileNames,
+    'videoFileNames': videoFileNames,
+    'reconStatus': reconStatus.name,
+  };
 
   factory CaptureProject.fromJson(Map<String, dynamic> json) => CaptureProject(
-        id: json['id'] as String,
-        name: json['name'] as String,
-        createdAt: DateTime.parse(json['createdAt'] as String),
-        photoFileNames:
-            (json['photoFileNames'] as List<dynamic>? ?? []).cast<String>(),
-        videoFileNames:
-            (json['videoFileNames'] as List<dynamic>? ?? []).cast<String>(),
-        reconStatus: ReconStatus.values.firstWhere(
-          (s) => s.name == json['reconStatus'],
-          orElse: () => ReconStatus.none,
-        ),
-      );
+    id: json['id'] as String,
+    name: json['name'] as String,
+    createdAt: DateTime.parse(json['createdAt'] as String),
+    photoFileNames: (json['photoFileNames'] as List<dynamic>? ?? [])
+        .cast<String>(),
+    videoFileNames: (json['videoFileNames'] as List<dynamic>? ?? [])
+        .cast<String>(),
+    reconStatus: ReconStatus.values.firstWhere(
+      (s) => s.name == json['reconStatus'],
+      orElse: () => ReconStatus.none,
+    ),
+  );
 }

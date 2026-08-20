@@ -94,15 +94,24 @@ class _PointCloudViewerScreenState extends State<PointCloudViewerScreen>
                   children: [
                     Icon(Icons.blur_on, size: 18, color: cs.primary),
                     const SizedBox(width: 6),
-                    Text('포인트클라우드 · ${_points.length}점',
-                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    Text(
+                      '포인트클라우드 · ${_points.length}점',
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
                     const Spacer(),
-                    Icon(Icons.threed_rotation,
-                        size: 16, color: cs.onSurfaceVariant),
+                    Icon(
+                      Icons.threed_rotation,
+                      size: 16,
+                      color: cs.onSurfaceVariant,
+                    ),
                     const SizedBox(width: 4),
-                    Text('드래그해서 회전',
-                        style: TextStyle(
-                            fontSize: 12, color: cs.onSurfaceVariant)),
+                    Text(
+                      '드래그해서 회전',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 6),

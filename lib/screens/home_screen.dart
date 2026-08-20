@@ -13,7 +13,9 @@ class HomeScreen extends StatelessWidget {
 
   Future<void> _createProject(BuildContext context) async {
     final now = DateTime.now();
-    final controller = TextEditingController(text: '스캔 ${now.month}/${now.day}');
+    final controller = TextEditingController(
+      text: '스캔 ${now.month}/${now.day}',
+    );
     final name = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
@@ -136,16 +138,14 @@ class _EmptyState extends StatelessWidget {
           children: [
             Icon(Icons.view_in_ar_outlined, size: 72, color: cs.primary),
             const SizedBox(height: 16),
-            Text('첫 촬영을 시작하세요',
-                style: Theme.of(context).textTheme.titleLarge),
+            Text('첫 촬영을 시작하세요', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 8),
             Text(
               '오브젝트 주위를 돌며 사진을 여러 장 찍거나\n동영상을 촬영하면 3D로 재구성합니다.',
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: cs.onSurfaceVariant),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
             FilledButton.icon(
@@ -187,8 +187,10 @@ class _ProjectCard extends StatelessWidget {
                       ? Image.file(thumb, fit: BoxFit.cover)
                       : Container(
                           color: cs.surfaceContainerHighest,
-                          child: Icon(Icons.image_outlined,
-                              color: cs.onSurfaceVariant),
+                          child: Icon(
+                            Icons.image_outlined,
+                            color: cs.onSurfaceVariant,
+                          ),
                         ),
                 ),
               ),
@@ -197,26 +199,31 @@ class _ProjectCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(project.name,
-                        style: Theme.of(context).textTheme.titleMedium,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis),
+                    Text(
+                      project.name,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     const SizedBox(height: 4),
-                    Text(project.formattedDate,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: cs.onSurfaceVariant)),
+                    Text(
+                      project.formattedDate,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
                         _CountChip(
-                            icon: Icons.photo_outlined,
-                            label: '사진 ${project.photoCount}'),
+                          icon: Icons.photo_outlined,
+                          label: '사진 ${project.photoCount}',
+                        ),
                         const SizedBox(width: 8),
                         _CountChip(
-                            icon: Icons.videocam_outlined,
-                            label: '동영상 ${project.videoCount}'),
+                          icon: Icons.videocam_outlined,
+                          label: '동영상 ${project.videoCount}',
+                        ),
                       ],
                     ),
                   ],

@@ -169,8 +169,8 @@ class _CaptureScreenState extends State<CaptureScreen>
                 },
               )
             : _controller == null
-                ? const Center(child: CircularProgressIndicator())
-                : _cameraUI(),
+            ? const Center(child: CircularProgressIndicator())
+            : _cameraUI(),
       ),
     );
   }
@@ -236,8 +236,7 @@ class _CaptureScreenState extends State<CaptureScreen>
               ),
             ),
             const SizedBox(width: 6),
-            Text(_fmt(_recorded),
-                style: const TextStyle(color: Colors.white)),
+            Text(_fmt(_recorded), style: const TextStyle(color: Colors.white)),
           ],
         ],
       ),
@@ -278,10 +277,13 @@ class _CaptureScreenState extends State<CaptureScreen>
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: TextButton(
-                    onPressed:
-                        _isRecording ? null : () => Navigator.maybePop(context),
-                    child: const Text('완료',
-                        style: TextStyle(color: Colors.white, fontSize: 16)),
+                    onPressed: _isRecording
+                        ? null
+                        : () => Navigator.maybePop(context),
+                    child: const Text(
+                      '완료',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
               ),
@@ -340,7 +342,9 @@ class _CaptureScreenState extends State<CaptureScreen>
                   width: 28,
                   height: 28,
                   child: CircularProgressIndicator(
-                      strokeWidth: 3, color: Colors.white),
+                    strokeWidth: 3,
+                    color: Colors.white,
+                  ),
                 )
               : AnimatedContainer(
                   duration: const Duration(milliseconds: 150),
@@ -349,8 +353,9 @@ class _CaptureScreenState extends State<CaptureScreen>
                   decoration: BoxDecoration(
                     color: isVideo ? Colors.red : Colors.white,
                     shape: _isRecording ? BoxShape.rectangle : BoxShape.circle,
-                    borderRadius:
-                        _isRecording ? BorderRadius.circular(6) : null,
+                    borderRadius: _isRecording
+                        ? BorderRadius.circular(6)
+                        : null,
                   ),
                 ),
         ),
@@ -372,19 +377,26 @@ class _ErrorView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.videocam_off_outlined,
-                color: Colors.white70, size: 56),
+            const Icon(
+              Icons.videocam_off_outlined,
+              color: Colors.white70,
+              size: 56,
+            ),
             const SizedBox(height: 16),
-            Text(message,
-                textAlign: TextAlign.center,
-                style: const TextStyle(color: Colors.white)),
+            Text(
+              message,
+              textAlign: TextAlign.center,
+              style: const TextStyle(color: Colors.white),
+            ),
             const SizedBox(height: 20),
             FilledButton(onPressed: onRetry, child: const Text('다시 시도')),
             const SizedBox(height: 4),
             TextButton(
               onPressed: () => Navigator.maybePop(context),
-              child: const Text('돌아가기',
-                  style: TextStyle(color: Colors.white70)),
+              child: const Text(
+                '돌아가기',
+                style: TextStyle(color: Colors.white70),
+              ),
             ),
           ],
         ),

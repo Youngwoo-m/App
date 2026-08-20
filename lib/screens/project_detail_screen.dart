@@ -19,7 +19,9 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeAutoReconstruct());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _maybeAutoReconstruct(),
+    );
   }
 
   /// 촬영이 충분하면 포인트클라우드→메시→텍스처를 자동 실행(진행 중이면 이어서).
@@ -49,11 +51,13 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
         content: Text('"${project.name}" 와(과) 모든 사진·동영상을 삭제합니다.'),
         actions: [
           TextButton(
-              onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('취소')),
+            onPressed: () => Navigator.pop(ctx, false),
+            child: const Text('취소'),
+          ),
           FilledButton(
             style: FilledButton.styleFrom(
-                backgroundColor: Theme.of(ctx).colorScheme.error),
+              backgroundColor: Theme.of(ctx).colorScheme.error,
+            ),
             onPressed: () => Navigator.pop(ctx, true),
             child: const Text('삭제'),
           ),
@@ -112,8 +116,10 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
-                    child: Text('사진 ${photos.length}장',
-                        style: Theme.of(context).textTheme.titleSmall),
+                    child: Text(
+                      '사진 ${photos.length}장',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                   ),
                 ),
                 SliverPadding(
@@ -121,10 +127,10 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
                   sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 6,
-                      crossAxisSpacing: 6,
-                    ),
+                          crossAxisCount: 3,
+                          mainAxisSpacing: 6,
+                          crossAxisSpacing: 6,
+                        ),
                     delegate: SliverChildBuilderDelegate(
                       (context, i) => _PhotoTile(file: photos[i]),
                       childCount: photos.length,
@@ -258,9 +264,13 @@ class _ReconPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w600, fontSize: 15)),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
               const SizedBox(height: 2),
               Text(subtitle, style: const TextStyle(fontSize: 13)),
             ],
@@ -270,14 +280,18 @@ class _ReconPanel extends StatelessWidget {
     );
   }
 
-  Widget _progress(BuildContext context,
-      {required String title, required String subtitle}) {
+  Widget _progress(
+    BuildContext context, {
+    required String title,
+    required String subtitle,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title,
-            style:
-                const TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+        Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+        ),
         const SizedBox(height: 4),
         Text(subtitle, style: const TextStyle(fontSize: 13)),
         const SizedBox(height: 12),
@@ -299,8 +313,10 @@ class _VideoStrip extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('동영상 ${videos.length}개',
-              style: Theme.of(context).textTheme.titleSmall),
+          Text(
+            '동영상 ${videos.length}개',
+            style: Theme.of(context).textTheme.titleSmall,
+          ),
           const SizedBox(height: 8),
           SizedBox(
             height: 84,
@@ -318,11 +334,16 @@ class _VideoStrip extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.play_circle_outline,
-                        color: cs.onSurfaceVariant, size: 28),
+                    Icon(
+                      Icons.play_circle_outline,
+                      color: cs.onSurfaceVariant,
+                      size: 28,
+                    ),
                     const SizedBox(height: 4),
-                    Text('클립 ${i + 1}',
-                        style: Theme.of(context).textTheme.labelSmall),
+                    Text(
+                      '클립 ${i + 1}',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
                   ],
                 ),
               ),
@@ -371,10 +392,7 @@ class _PhotoViewer extends StatelessWidget {
         foregroundColor: Colors.white,
       ),
       body: Center(
-        child: InteractiveViewer(
-          maxScale: 5,
-          child: Image.file(file),
-        ),
+        child: InteractiveViewer(maxScale: 5, child: Image.file(file)),
       ),
     );
   }
@@ -393,8 +411,11 @@ class _EmptyCapture extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.photo_camera_back_outlined,
-                size: 64, color: cs.onSurfaceVariant),
+            Icon(
+              Icons.photo_camera_back_outlined,
+              size: 64,
+              color: cs.onSurfaceVariant,
+            ),
             const SizedBox(height: 12),
             const Text('아직 촬영이 없습니다'),
             const SizedBox(height: 16),

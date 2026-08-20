@@ -24,8 +24,10 @@ class AboutScreen extends StatelessWidget {
           SizedBox(height: 24),
           _SectionTitle('재구성 파이프라인'),
           SizedBox(height: 4),
-          Text('촬영부터 3D 모델까지의 단계입니다.',
-              style: TextStyle(fontSize: 13, color: Colors.grey)),
+          Text(
+            '촬영부터 3D 모델까지의 단계입니다.',
+            style: TextStyle(fontSize: 13, color: Colors.grey),
+          ),
           SizedBox(height: 12),
           _PipelineInfographic(),
           SizedBox(height: 24),
@@ -34,7 +36,8 @@ class AboutScreen extends StatelessWidget {
           _ConceptCard(
             icon: Icons.blur_on,
             title: '포인트클라우드',
-            body: '대상 표면 위 수많은 점들의 3D 좌표 집합. 가볍고 빠르게 형상을 확인할 수 있어 '
+            body:
+                '대상 표면 위 수많은 점들의 3D 좌표 집합. 가볍고 빠르게 형상을 확인할 수 있어 '
                 '이 앱에서는 자동으로 생성합니다.',
           ),
           SizedBox(height: 10),
@@ -93,11 +96,12 @@ class _Hero extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Photo3D',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(fontWeight: FontWeight.bold)),
+                Text(
+                  'Photo3D',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(height: 2),
                 const Text('사진·동영상으로 만드는 3D 모델'),
               ],
@@ -115,11 +119,12 @@ class _SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge
-            ?.copyWith(fontWeight: FontWeight.bold));
+    return Text(
+      text,
+      style: Theme.of(
+        context,
+      ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+    );
   }
 }
 
@@ -131,12 +136,27 @@ class _PipelineInfographic extends StatelessWidget {
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final stages = <_StageData>[
-      _StageData(Icons.photo_camera, '촬영', '사진·동영상으로 대상을 여러 각도에서', null,
-          cs.primary),
-      _StageData(Icons.movie_filter_outlined, '프레임 추출', '동영상을 이미지 프레임으로 분해',
-          '자동', cs.primary),
-      _StageData(Icons.hub_outlined, '특징점 매칭 (SfM)', '여러 사진 속 같은 점을 대응',
-          '자동', cs.primary),
+      _StageData(
+        Icons.photo_camera,
+        '촬영',
+        '사진·동영상으로 대상을 여러 각도에서',
+        null,
+        cs.primary,
+      ),
+      _StageData(
+        Icons.movie_filter_outlined,
+        '프레임 추출',
+        '동영상을 이미지 프레임으로 분해',
+        '자동',
+        cs.primary,
+      ),
+      _StageData(
+        Icons.hub_outlined,
+        '특징점 매칭 (SfM)',
+        '여러 사진 속 같은 점을 대응',
+        '자동',
+        cs.primary,
+      ),
       _StageData(Icons.blur_on, '포인트클라우드', '점들의 3D 좌표 집합', '자동', cs.primary),
       _StageData(Icons.grid_3x3, '메시', '점을 삼각형 면으로 연결', '자동', cs.tertiary),
       _StageData(Icons.texture, '텍스처', '사진 색을 표면에 입힘', '자동', cs.tertiary),
@@ -172,8 +192,11 @@ class _StageData {
 }
 
 class _StageRow extends StatelessWidget {
-  const _StageRow(
-      {required this.data, required this.index, required this.isLast});
+  const _StageRow({
+    required this.data,
+    required this.index,
+    required this.isLast,
+  });
   final _StageData data;
   final int index;
   final bool isLast;
@@ -198,12 +221,7 @@ class _StageRow extends StatelessWidget {
                 child: Icon(data.icon, size: 20, color: data.color),
               ),
               if (!isLast)
-                Expanded(
-                  child: Container(
-                    width: 2,
-                    color: cs.outlineVariant,
-                  ),
-                ),
+                Expanded(child: Container(width: 2, color: cs.outlineVariant)),
             ],
           ),
           const SizedBox(width: 14),
@@ -215,17 +233,23 @@ class _StageRow extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text('$index. ${data.title}',
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w700, fontSize: 15)),
+                      Text(
+                        '$index. ${data.title}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 15,
+                        ),
+                      ),
                       const SizedBox(width: 8),
-                      if (data.badge != null) _Badge(text: data.badge!, color: data.color),
+                      if (data.badge != null)
+                        _Badge(text: data.badge!, color: data.color),
                     ],
                   ),
                   const SizedBox(height: 2),
-                  Text(data.desc,
-                      style: TextStyle(
-                          fontSize: 13, color: cs.onSurfaceVariant)),
+                  Text(
+                    data.desc,
+                    style: TextStyle(fontSize: 13, color: cs.onSurfaceVariant),
+                  ),
                 ],
               ),
             ),
@@ -249,16 +273,24 @@ class _Badge extends StatelessWidget {
         color: color.withValues(alpha: 0.18),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(text,
-          style: TextStyle(
-              fontSize: 11, fontWeight: FontWeight.w600, color: color)),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w600,
+          color: color,
+        ),
+      ),
     );
   }
 }
 
 class _ConceptCard extends StatelessWidget {
-  const _ConceptCard(
-      {required this.icon, required this.title, required this.body});
+  const _ConceptCard({
+    required this.icon,
+    required this.title,
+    required this.body,
+  });
   final IconData icon;
   final String title;
   final String body;
@@ -281,15 +313,22 @@ class _ConceptCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w700, fontSize: 15)),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(body,
-                    style: TextStyle(
-                        fontSize: 13,
-                        height: 1.45,
-                        color: cs.onSurfaceVariant)),
+                Text(
+                  body,
+                  style: TextStyle(
+                    fontSize: 13,
+                    height: 1.45,
+                    color: cs.onSurfaceVariant,
+                  ),
+                ),
               ],
             ),
           ),
@@ -337,11 +376,12 @@ class _HowToShoot extends StatelessWidget {
 }
 
 class _TipBlock extends StatelessWidget {
-  const _TipBlock(
-      {required this.title,
-      required this.icon,
-      required this.color,
-      required this.items});
+  const _TipBlock({
+    required this.title,
+    required this.icon,
+    required this.color,
+    required this.items,
+  });
   final String title;
   final IconData icon;
   final Color color;
@@ -364,9 +404,13 @@ class _TipBlock extends StatelessWidget {
             children: [
               Icon(icon, color: color, size: 20),
               const SizedBox(width: 8),
-              Text(title,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w700, fontSize: 15)),
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 15,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -376,14 +420,16 @@ class _TipBlock extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('•  ',
-                      style: TextStyle(color: cs.onSurfaceVariant)),
+                  Text('•  ', style: TextStyle(color: cs.onSurfaceVariant)),
                   Expanded(
-                    child: Text(item,
-                        style: TextStyle(
-                            fontSize: 13,
-                            height: 1.4,
-                            color: cs.onSurfaceVariant)),
+                    child: Text(
+                      item,
+                      style: TextStyle(
+                        fontSize: 13,
+                        height: 1.4,
+                        color: cs.onSurfaceVariant,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -417,7 +463,10 @@ class _BackendNote extends StatelessWidget {
               '(예: Apple Object Capture · 클라우드 · COLMAP/Meshroom). '
               '현재는 파이프라인 흐름을 미리 보여주는 단계입니다.',
               style: TextStyle(
-                  fontSize: 12, height: 1.45, color: cs.onSurfaceVariant),
+                fontSize: 12,
+                height: 1.45,
+                color: cs.onSurfaceVariant,
+              ),
             ),
           ),
         ],

@@ -59,8 +59,9 @@ class ProjectStore extends ChangeNotifier {
       final list = jsonDecode(await _indexFile.readAsString()) as List<dynamic>;
       _projects
         ..clear()
-        ..addAll(list.map((e) =>
-            CaptureProject.fromJson(e as Map<String, dynamic>)));
+        ..addAll(
+          list.map((e) => CaptureProject.fromJson(e as Map<String, dynamic>)),
+        );
       _projects.sort((a, b) => b.createdAt.compareTo(a.createdAt));
     } catch (e) {
       debugPrint('ProjectStore: 인덱스 로드 실패, 새로 시작 ($e)');
