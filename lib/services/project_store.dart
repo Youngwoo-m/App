@@ -96,12 +96,6 @@ class ProjectStore extends ChangeNotifier {
     return project;
   }
 
-  Future<void> renameProject(CaptureProject project, String name) async {
-    project.name = name;
-    await _save();
-    notifyListeners();
-  }
-
   /// 촬영된 임시 파일을 프로젝트 폴더로 복사해 영구 보관한다.
   Future<void> addPhoto(CaptureProject project, String sourcePath) async {
     if (!persistent) {

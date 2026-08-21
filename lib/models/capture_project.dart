@@ -14,7 +14,7 @@ class CaptureProject {
   static const int recommendedMinPhotos = 20;
 
   final String id;
-  String name;
+  final String name;
   final DateTime createdAt;
 
   /// 프로젝트 폴더 안에 저장된 사진 파일 이름들(절대경로 X — 컨테이너 경로 변경에 견고).
