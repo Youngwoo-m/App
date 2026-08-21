@@ -27,6 +27,9 @@ class _CaptureScreenState extends State<CaptureScreen>
   Timer? _timer;
   String? _error;
 
+  /// 라이프사이클 전환이 연속으로 오는 동안 컨트롤러가 중복 생성되는 것을 막는다.
+  bool _settingUp = false;
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +38,8 @@ class _CaptureScreenState extends State<CaptureScreen>
   }
 
   Future<void> _setup() async {
+    if (_settingUp) return;
+    _settingUp = true;
     try {
       if (_cameras.isEmpty) {
         _cameras = await availableCameras();
@@ -53,7 +58,8 @@ class _CaptureScreenState extends State<CaptureScreen>
         enableAudio: false,
       );
       await controller.initialize();
-      if (!mounted) {
+      // initialize() 대기 중 화면이 사라졌거나 다른 컨트롤러가 이미 붙었으면 폐기.
+      if (!mounted || _controller != null) {
         await controller.dispose();
         return;
       }
@@ -63,16 +69,20 @@ class _CaptureScreenState extends State<CaptureScreen>
       });
     } catch (e) {
       if (mounted) setState(() => _error = '카메라 초기화 실패: $e');
+    } finally {
+      _settingUp = false;
     }
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final c = _controller;
-    if (c == null || !c.value.isInitialized) return;
     if (state == AppLifecycleState.inactive) {
+      final c = _controller;
+      if (c == null || !c.value.isInitialized) return;
+      // 녹화 중에는 세션을 유지해 녹화가 끊기지 않게 한다.
       if (_isRecording) return;
-      _controller = null;
+      // setState로 지워야 폐기된 컨트롤러를 CameraPreview가 계속 참조하지 않는다.
+      setState(() => _controller = null);
       c.dispose();
     } else if (state == AppLifecycleState.resumed) {
       if (_controller == null) _setup();
