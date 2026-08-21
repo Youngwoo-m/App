@@ -1,5 +1,5 @@
 name: photo3d
-description: "A new Flutter project."
+description: "사진·동영상으로 3D 모델을 만드는 사진측량 앱."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
